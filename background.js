@@ -3,8 +3,8 @@ let store = [];
 chrome.runtime.onInstalled.addListener(() => {
   chrome.webRequest.onBeforeRequest.addListener(
     ({ url }) => {
-        var redirect = store.find(param => param && url.includes(Object.keys(param)[0]));
-        if (Object.keys(redirect)[0]) {
+        const redirect = store.find(param => param && url.includes(Object.keys(param)[0]));
+        if (redirect && Object.keys(redirect)[0]) {
           return {
             redirectUrl: url.replace(Object.keys(redirect)[0], Object.values(redirect)[0]),
           };
