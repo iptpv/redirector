@@ -7,12 +7,12 @@ $('.section').forEach(e => {
 })
 
 $('body')[0].onclick = e => {
+  const parent = e.target.parentNode
+  const children = parent.children;
   if (e.target.className === 'redirect') {
-    const parent = e.target.parentNode
-    const children = parent.children;
     localStorage[parent.id] = JSON.stringify({[children[0].value]: children[1].value});
     const port = chrome.extension.connect({
-      name: "Sample Communication"
+      name: parent.id
     });
     port.postMessage(localStorage[parent.id]);
   }
